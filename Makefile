@@ -10,7 +10,7 @@ OBJ = main.o chip8.o
 
 
 main: $(OBJ)
-	x86_64-w64-mingw32-gcc -o chip.exe $^ $(CFLAGS)
+	x86_64-w64-mingw32-gcc -o chip8.exe $^ $(CFLAGS) -D__USE_MINGW_ANSI_STDIO 
 	rm -f $(OBJ)
 
 linux:
@@ -19,5 +19,5 @@ linux:
 
 
 clean:
-	rm -f chip.exe $(OBJ)
+	rm -f chip8.exe chip8 $(OBJ)
 
