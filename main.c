@@ -1,4 +1,4 @@
-#define __USE_MINGW_ANSI_STDIO 1
+//#define __USE_MINGW_ANSI_STDIO 1
 
 #include <stdio.h>
 #include "chip8.h"
