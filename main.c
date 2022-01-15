@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
     char* file_name = argv[1];
     FILE* gameFile = fopen(file_name, "rb");
 
-    unsigned char buffer[100];
 
     if (!gameFile) {
         printf("Unable to read or find file \"%s\"\n", file_name);
@@ -16,15 +15,22 @@ int main(int argc, char *argv[]) {
     } else {
         printf("Loading \"%s\"...\n", file_name);
     }
+    fseek(gameFile, 0, SEEK_END);
+    int size = ftell(gameFile);
+    unsigned char buffer[size];
     fseek(gameFile, 0, SEEK_SET);
+
+
     fread(buffer, sizeof(unsigned char), sizeof(buffer), gameFile);
     fclose(gameFile);
-    int i = 0;
-    for (i = 0; i < 100; i++) {
-        printf("0x%02hhX ", buffer[i]);
-    }
+    // int i = 0;
+    // for (i = 0; i < size; i++) {
+    //     printf("0x%02hhX ", buffer[i]);
+    // }
 
     init(&chip);
+    load_rom(&chip, buffer, size);
+    run(&chip);
 
     return 0;
 }
